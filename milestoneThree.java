@@ -80,15 +80,21 @@ public class milestoneThree {
 				}
 			}
 			button = Button.waitForAnyPress();
+			//If hit left button and we're already on x, do nothing
 			if (button==2 && xselected==1){}
+			//Else if hit left button, move arrow to x
 			else if(button==2){
 				xselected=1;
 			}
+			//If hit right button and we're already on y, do nothing
 			else if(button==4&&xselected==0){}
+			//Else if hit right button, move arrow to y
 			else if(button==4){
 				xselected=0;
 			}
+			//Else if hit orange, increment either x or y depending on selection
 			else if(button==1){
+				//Make sure can't leave grid (bounded by 6 or8)
 				if(xgoto==6&&ygoto==8){}
 				else if(xgoto==6){
 					ygoto=ygoto + (1-xselected)*1;
@@ -100,7 +106,9 @@ public class milestoneThree {
 					xgoto=xgoto + xselected*1;
 					ygoto=ygoto + (1-xselected)*1;}
 			}
+			//Else if hit gray button, decrease either x or y depending on selection
 			else if(button==8){
+				//Make sure can't leave grid (bounded by 0)
 				if(xgoto==0&&ygoto==0){}
 				else if(xgoto==0){
 					ygoto=ygoto - (1-xselected)*1;
@@ -112,12 +120,15 @@ public class milestoneThree {
 					xgoto=xgoto - xselected*1;
 					ygoto=ygoto - (1-xselected)*1;}
 			}
+			//Else if hit multiple buttons, save data and exit loop.
 			else {
 				save=true;
 			}
+			//Update information on screen
 			LCD.drawInt(xgoto,3,4);
 			LCD.drawInt(ygoto,13,4);
 		}
+		//Exit loop, points are already saved, tell user saved.
 		LCD.clear();
 		System.out.println("Points saved!");
 		Button.waitForAnyPress();
